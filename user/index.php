@@ -1,3 +1,10 @@
+<?php
+   session_start();
+   if($_SESSION['user_login_status'] != "logged in" and !isset($_SESSION['email']) )
+    header("Location:../index.php");
+   
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -23,7 +30,7 @@
                             <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="user.php">User window</a>
+                            <a class="nav-link" href="user.php">Post add</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="logout.php">Log out</a>

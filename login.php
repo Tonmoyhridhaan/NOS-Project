@@ -1,3 +1,8 @@
+
+<?php
+session_start();
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -61,9 +66,11 @@
             </div>
         </main>
 
-        <footer class="bg-dark py-3">
-            <p class="m-0 text-center text-white">&copy; Copyright reserved by NOS corporation. And Designed by <a href="#">Tonmoy Barua</a></p>
-        </footer>
+         <div>
+            <footer class="bg-dark py-3">
+                 <p class="m-0 text-center text-white">&copy; Copyright reserved by NOS corporation. And Designed by <a href="#">Tonmoy Barua</a></p>
+            </footer>
+        </div>
 
         <?php
             include 'connection.php';
@@ -82,15 +89,20 @@
                    
                     $_SESSION['email'] = $email;
                     $_SESSION['user_login_status'] = "logged in";
-                    header("location: user/user.php");
+                    $_SESSION['user_id'] = $row1['id'];
+                    header("location: user/index.php");
                 }
                 else if(mysqli_num_rows($result2) == 1)
                 {
                
                     $_SESSION['email'] = $email;
                     $_SESSION['admin_login_status'] = "logged in";
-                    header("location: admin/admin.php");
+                    header("location: admin/index.php");
                 }
+                else
+                {
+                     echo "<p style='color: red;'>Incorrect UserId or Password</p>";
+                 }
                 
             }
             
