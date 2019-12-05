@@ -33,6 +33,9 @@
                             <a class="nav-link active" href="user.php">Post add</a>
                     </li> 
                     <li class="nav-item">
+                            <a class="nav-link" href="buycar.php">Buy car</a>
+                    </li> 
+                    <li class="nav-item">
                          <a class="nav-link" href="logout.php">Log out</a>
                     </li>
                 </ul>
@@ -52,17 +55,18 @@
                             <label for="brand">Brand</label>
                                 <select name="brand" class="form-control" id="brand" type="text">
                                     <option selected>Select Brand</option>
-                                    <option>Aston Martin</option>
-                                    <option>Bently</option>
-                                    <option>BMW</option>
-                                    <option>Ferrari</option>
-                                    <option>Ford</option>
-                                    <option>Hyundai</option>
-                                    <option>Lamborghini</option>
-                                    <option>Mercedes</option>
-                                    <option>Mitshubishi</option>
-                                    <option>Nissan</option>
-                                    <option>Toyota</option>
+                                    <option value = "Aston Martin">Aston Martin</option>
+                                    <option value = "Bently">Bently</option>
+                                    <option value = "BMW">BMW</option>
+                                    <option value = "Ferrari">Ferrari</option>
+                                    <option value = "Ford">Ford</option>
+                                    <option value = "Hyundai">Hyundai</option>
+                                    <option value = "Lamborghini">Lamborghini</option>
+                                    <option value = "Mercedes">Mercedes</option>
+                                    <option value = "Mitshubishi">Mitshubishi</option>
+                                    <option value = "Nissan">Nissan</option>
+                                    <option value = "Toyota">Toyota</option>
+                                    <option value = "Other">Other</option>
                                 </select>
                             </div>
 
@@ -233,6 +237,7 @@ if(isset($_POST['submit']))
          if($image !=null){
                      move_uploaded_file($_FILES['image']['tmp_name'],"../uploadedimage/$image");
                      }
+         header('location: buycar.php');
      }
      else
      {
@@ -245,7 +250,7 @@ if(isset($_POST['submit']))
     // $_SESSION['gender'] = $gender;
     // $_SESSION['dob'] = $dob;
     // $_SESSION['success'] = "congrats";
-
+    header('location: buycar.php');
 }
-header('location: index.php');
+
 ?>

@@ -1,3 +1,9 @@
+<?php
+   session_start();
+   if($_SESSION['admin_login_status'] != "logged in" and !isset($_SESSION['email']) )
+    header("Location:../index.php");
+?>
+
 <!doctype html>
 <html lang="en">
 <head>

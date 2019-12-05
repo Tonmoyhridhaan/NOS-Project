@@ -33,6 +33,9 @@
                             <a class="nav-link" href="user.php">Post add</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="buycar.php">Buy car</a>
+                         </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="logout.php">Log out</a>
                         </li>
                     </ul>
