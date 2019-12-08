@@ -120,7 +120,7 @@ if(isset($_POST['signup']))
      mysqli_query($con, $query);
     // $_SESSION['name'] = $name;
     // $_SESSION['email'] = $email;
-    // $_SESSION['mobile'] = $mobile;
+    // $_SESSION['mobile'] = $mobile;po
     // $_SESSION['loc'] = $loc;
     // $_SESSION['gender'] = $gender;
     // $_SESSION['dob'] = $dob;

@@ -41,11 +41,49 @@
                 </div>
             </nav>
         </header>
+        <!-- block member -->
      <body>
-        <h1>Admin page is under construction..!!</h1>
-        <br>
-        <br>
-        <br>
+        <main>
+            <div class="login-area mt-5">
+                <div class="container">
+                    <div class="rowL">
+                        <div class="col-md-6 offset-md-3">
+                            <form method='post'  action = 'admin.php' class="bg-white py-5 px-3">
+
+                            <div class="form-group">
+                            <label for="member">Choose a member email</label>
+                                <select name="email" class="form-control" id="member" type="text">
+                                    <option selected value="">Select email</option>
+                                    <?php
+                                        include("../connection.php");
+                                        $sql="select distinct email from member";
+                                        $r=mysqli_query($con,$sql);
+                                        while($row=mysqli_fetch_array($r))
+                                        {
+                                            $email=$row['email'];
+                                            echo "<option value='$email'>$email</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-dark btn-block mt-3" value="go" name="go">Block member</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <?php
+        include("../connection.php");
+        if(isset($_POST['go']))
+        {
+            $email=$_POST['email'];
+            $query = "update member set status = 1 where email = '$email'";
+            if(mysqli_query($con,$query)) echo "Succesfully removed member $email"; 
+        }
+        ?>
+
     </body>
         <script src="../vendor/jquery-3.4.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

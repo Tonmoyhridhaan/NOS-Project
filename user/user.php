@@ -1,5 +1,6 @@
 <?php
    session_start();
+   
    if($_SESSION['user_login_status']!="logged in" and ! isset($_SESSION['email']) )
     header("Location:../index.php");
    
@@ -35,6 +36,10 @@
                     <li class="nav-item">
                             <a class="nav-link" href="buycar.php">Buy car</a>
                     </li> 
+                    
+                    <li class="nav-item">
+                         <a class="nav-link " href="recieved request.php">Recieved Request</a>
+                    </li>
                     <li class="nav-item">
                          <a class="nav-link" href="logout.php">Log out</a>
                     </li>
@@ -43,7 +48,7 @@
             </nav>
         </header>
      <body>
-        <!-- sign up  -->
+        <!-- post car  -->
         <main>
             <div class="login-area mt-5">
                 <div class="container">

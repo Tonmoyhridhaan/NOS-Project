@@ -87,10 +87,17 @@ session_start();
                 if(mysqli_num_rows($result1) == 1)
                 {
                    
-                    $_SESSION['email'] = $email;
-                    $_SESSION['user_login_status'] = "logged in";
-                    $_SESSION['user_id'] = $row1['id'];
-                    header("location: user/index.php");
+                    if($row1['status'] == 1)
+                    {
+                        echo "Your account has been removed";
+                    }
+                    else
+                    {
+                        $_SESSION['email'] = $email;
+                        $_SESSION['user_login_status'] = "logged in";
+                        $_SESSION['user_id'] = $row1['id'];
+                        header("location: user/index.php");
+                    }
                 }
                 else if(mysqli_num_rows($result2) == 1)
                 {

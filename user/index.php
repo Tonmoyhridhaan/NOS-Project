@@ -35,7 +35,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="buycar.php">Buy car</a>
                          </li>
+                        
                         <li class="nav-item">
+                         <a class="nav-link " href="recieved request.php">Recieved Request</a>
+                    </li>
+                    <li class="nav-item">
                             <a class="nav-link" href="logout.php">Log out</a>
                         </li>
                     </ul>
