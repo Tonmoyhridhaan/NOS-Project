@@ -31,14 +31,14 @@
                      <li class="nav-item ">
                             <a class="nav-link" href="index.php">Home </span></a>
                     </li>
-                    <li class="nav-item active">
-                            <a class="nav-link" href="admin.php">Block member<span class="sr-only">(current)</span></a>
-                    </li>
                     <li class="nav-item ">
-                            <a class="nav-link" href="ubmember.php">unblock member</a>
+                            <a class="nav-link" href="admin.php">Block member</a>
+                    </li>
+                    <li class="nav-item active">
+                            <a class="nav-link" href="ubmember.php">unblock member<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="postapproval.php">Post requests<span class="sr-only">(current)</span></a>
+                            <a class="nav-link " href="postapproval.php">Post requests<span class="sr-only">(current)</span></a>
                     </li>
 
                     <li class="nav-item">
@@ -46,7 +46,7 @@
                     </li>
                     <li class="nav-item">
                          <a class="nav-link" href="logout.php">Log out</a>
-                    </li>
+                    </li>   
                 </ul>
                 </div>
             </nav>
@@ -58,15 +58,15 @@
                 <div class="container">
                     <div class="rowL">
                         <div class="col-md-6 offset-md-3">
-                            <form method='post'  action = 'admin.php' class="bg-white py-5 px-3">
+                            <form method='post'  action = 'ubmember.php' class="bg-white py-5 px-3">
 
                             <div class="form-group">
-                            <label for="member">Choose a member email to block</label>
+                            <label for="member">Choose a member email to unblock</label>
                                 <select name="email" class="form-control" id="member" type="text">
                                     <option selected value="">Select email</option>
                                     <?php
                                         include("../connection.php");
-                                        $sql="select email from member where status = 0";
+                                        $sql="select email from member where status = 1";
                                         $r=mysqli_query($con,$sql);
                                         while($row=mysqli_fetch_array($r))
                                         {
@@ -76,7 +76,7 @@
                                     ?>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-dark btn-block mt-3" value="go" name="go">Block member</button>
+                            <button type="submit" class="btn btn-dark btn-block mt-3" value="go" name="go">Unblock member</button>
                             </form>
                         </div>
                     </div>
@@ -89,8 +89,8 @@
         if(isset($_POST['go']))
         {
             $email=$_POST['email'];
-            $query = "update member set status = 1 where email = '$email'";
-            if(mysqli_query($con,$query)) echo "Succesfully removed member $email"; 
+            $query = "update member set status = 0 where email = '$email'";
+            if(mysqli_query($con,$query)) echo "Succesfully addded member $email"; 
             $query = "select * from member where email = '$email'";
             $r =  mysqli_query($con,$query);
             $row = mysqli_fetch_array($r);
@@ -99,29 +99,27 @@
             $r =  mysqli_query($con,$query);
             $row = mysqli_fetch_array($r);
             $status = $row['status'];
-            if($status == 0)
+            if($status == 5)
             {
-                $query = "update cars set status = 5 where m_id = $id";
+                $query = "update cars set status = 0 where m_id = $id";
                 mysqli_query($con,$query);
             }
             else
             {
-                $query = "update cars set status = 6 where m_id = $id";
+                $query = "update cars set status = 1 where m_id = $id";
                 mysqli_query($con,$query);
             }
             $query = "select * from request where bid = $id";
             $r =  mysqli_query($con,$query);
             $row = mysqli_fetch_array($r);
             $status = $row['status'];
-            if($status == 0)
+            if($status == 5)
             {
-                $query = "update request set status = 5 where bid = $id";
+                $query = "update request set status = 0 where bid = $id";
                 mysqli_query($con,$query);
             }
-            
 
         }
-
         ?>
 
     </body>

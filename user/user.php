@@ -40,6 +40,27 @@
                     <li class="nav-item">
                          <a class="nav-link " href="recieved request.php">Recieved Request</a>
                     </li>
+
+                    <li class="nav-item">
+                         <a class="nav-link " href="sent request.php">Sent Request</a>
+                    </li>
+
+                    <li class="nav-item">
+                         <a class="nav-link" href="myposts.php">My posts</a>
+                    </li>
+
+                    <li class="nav-item">
+                         <a class="nav-link" href="mysells.php">My sells</a>
+                    </li>
+
+                    <li class="nav-item">
+                         <a class="nav-link" href="mybuys.php">My buys</a>
+                    </li>
+
+                    <li class="nav-item">
+                         <a class="nav-link" href="changepass.php">Change password</a>
+                    </li>
+                    
                     <li class="nav-item">
                          <a class="nav-link" href="logout.php">Log out</a>
                     </li>
@@ -242,7 +263,7 @@ if(isset($_POST['submit']))
          if($image !=null){
                      move_uploaded_file($_FILES['image']['tmp_name'],"../uploadedimage/$image");
                      }
-         header('location: buycar.php');
+        
      }
      else
      {
@@ -255,7 +276,6 @@ if(isset($_POST['submit']))
     // $_SESSION['gender'] = $gender;
     // $_SESSION['dob'] = $dob;
     // $_SESSION['success'] = "congrats";
-    header('location: buycar.php');
-}
-
+   
+    }
 ?>

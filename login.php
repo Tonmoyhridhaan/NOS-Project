@@ -65,7 +65,8 @@ session_start();
                 </div>
             </div>
         </main>
-
+        <br></br>
+        <br></br>
          <div>
             <footer class="bg-dark py-3">
                  <p class="m-0 text-center text-white">&copy; Copyright reserved by NOS corporation. And Designed by <a href="#">Tonmoy Barua</a></p>
@@ -99,11 +100,13 @@ session_start();
                         header("location: user/index.php");
                     }
                 }
+
                 else if(mysqli_num_rows($result2) == 1)
                 {
                
                     $_SESSION['email'] = $email;
                     $_SESSION['admin_login_status'] = "logged in";
+                    $_SESSION['admin_id'] = $row2['id'];
                     header("location: admin/index.php");
                 }
                 else

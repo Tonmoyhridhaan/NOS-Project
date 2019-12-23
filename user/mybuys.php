@@ -37,7 +37,7 @@
                             <a class="nav-link" href="user.php">Post add</a>
                     </li> 
                     <li class="nav-item">
-                            <a class="nav-link active" href="buycar.php">Buy car</a>
+                            <a class="nav-link" href="buycar.php">Buy car</a>
                     </li> 
                     
                     <li class="nav-item">
@@ -56,14 +56,14 @@
                          <a class="nav-link" href="mysells.php">My sells</a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item active">
                          <a class="nav-link" href="mybuys.php">My buys</a>
                     </li>
 
                     <li class="nav-item">
                          <a class="nav-link" href="changepass.php">Change password</a>
                     </li>
-
+                    
                     <li class="nav-item">
                          <a class="nav-link" href="logout.php">Log out</a>
                     </li>
@@ -71,48 +71,14 @@
                 </div>
             </nav>
         </header>
-     
-        <!-- post table  -->
-        <!-- Select box  -->
-        <main>
-            <div class="login-area mt-5">
-                <div class="container">
-                    <div class="rowL">
-                        <div class="col-md-6 offset-md-3">
-                            <form method='post'  enctype="multipart/form-data" class="bg-white py-5 px-3">
 
-                            <div class="form-group">
-                            <label for="brand">Brand</label>
-                                <select name="brand" class="form-control" id="brand" type="text">
-                                    <option selected value="">Select Brand</option>
-                                    <?php
-                                        include("../connection.php");
-                                        $sql="select distinct brand from cars";
-                                        $r=mysqli_query($con,$sql);
-                                        while($row=mysqli_fetch_array($r))
-                                        {
-                                            $brand=$row['brand'];
-                                            echo "<option value='$brand'>$brand</option>";
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-dark btn-block mt-3" value="go" name="go">Search Car</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
     <div class="table-responsive" id="sailorTableArea">
     <table id="sailorTable" class="table table-striped table-bordered" width="100%">
     <?php
         include("../connection.php");
-        if(isset($_POST['go']))
-        {
-            $brand=$_POST['brand'];
-            $query = "select * from cars,member where cars.brand = '$brand' and member.id = cars.m_id and cars.status = 1";
-            $r = mysqli_query($con,$query);
+        $id = $_SESSION['user_id'];
+        $query = "select brand,type,mobile,name,prices,loc,image from cars,member,orders where orders.bid = $id and cars.p_id = orders.pid and member.id = orders.sid";
+        $r = mysqli_query($con,$query);
             // echo $r['brand'];
             // echo $r['make'];
             // echo $r['loc'];
@@ -120,30 +86,28 @@
             // echo $r['price'];
             // $r=mysqli_fetch_array($query);
         
-            echo "<thead>
-                <tr>
-                    <th>Brand</th>
-                    <th>Make</th>
-                    <th>Make Year</th>
-                    <th>location</th>
-                    <th>Type</th>
-                    <th>Price</th>
-                    <th>Image</th>
-                    <th>Action</th>
-                </tr>
-            </thead>";
-            echo "<tbody>";
-            while($row = mysqli_fetch_array($r))
-            {
-                $make = $row['make'];
-                $loc = $row['loc'];
-                $make_year = $row['make_year'];
-                $type = $row['type'];
-                $price = $row['price'];
-                $image = $row['image'];
-                $m_id = $row['m_id'];
-                $mobile = $row['mobile'];
-                $pid = $row['p_id'];
+         echo "<thead>
+               <tr>
+                <th>Brand</th>
+                <th>Car Type</th>
+                <th>Bought from</th>
+                <th>Seller name</th>
+                <th>Seller mobile</th>
+                <th>Buying price</th>
+                <th>Image</th>
+               </tr>
+        </thead>";
+        echo "<tbody>";
+        while($row = mysqli_fetch_array($r))
+         {
+            $brand = $row['brand'];
+            $type = $row['type'];
+            $loc = $row['loc'];
+            $name = $row['name'];
+            $mobile = $row['mobile'];
+            $price = $row['prices'];
+            $image = $row['image'];
+            
                 // $_SESSION['make'] = $make;
                 // $_SESSION['loc'] = $loc;
                 // $_SESSION['make_year'] = $make_year;
@@ -154,20 +118,19 @@
                 // $_SESSION['pid'] = $pid;
                 // $_SESSION['sid'] = $m_id;
 
-                echo "<tr>
-                    <td>$brand</td>
-                    <td>$make</td>
-                    <td>$loc</td>
-                    <td>$make_year</td>
-                    <td>$type</td>
-                    <td>$price</td>
-                    <td><img src='../uploadedimage/$image' height='100px' width='100px'></td>
-                    <td><a href='viewpost.php?pid=$pid'>View post </a></td>
-                </tr>";
+            echo "<tr>
+                 <td>$brand</td>
+                <td>$type</td>
+                <td>$loc</td>
+                <td>$name</td>
+                <td>$mobile</td>
+                <td>$price</td>
+                <td><img src='../uploadedimage/$image' height='100px' width='100px'></td>
+             </tr>";
             }
             echo "</tbody>";
             echo "</table>";
-        }
+        
     ?>
     </div>
         <script src="../vendor/jquery-3.4.1.min.js"></script>

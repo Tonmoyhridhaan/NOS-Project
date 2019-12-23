@@ -32,13 +32,35 @@
                         <li class="nav-item">
                             <a class="nav-link" href="user.php">Post add</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="buycar.php">Buy car</a>
-                         </li>
+                        </li>
                         
                         <li class="nav-item">
-                         <a class="nav-link " href="recieved request.php">Recieved Request</a>
+                          <a class="nav-link " href="recieved request.php">Recieved Request</a>
+                        </li>
+
+                       <li class="nav-item">
+                          <a class="nav-link " href="sent request.php">Sent Request</a>
+                       </li>
+
+                       <li class="nav-item">
+                         <a class="nav-link" href="myposts.php">My posts</a>
+                      </li>
+
+                      <li class="nav-item">
+                         <a class="nav-link" href="mysells.php">My sells</a>
                     </li>
+
+                    <li class="nav-item">
+                         <a class="nav-link" href="mybuys.php">My buys</a>
+                    </li>
+
+                    <li class="nav-item">
+                         <a class="nav-link" href="changepass.php">Change password</a>
+                    </li>
+
                     <li class="nav-item">
                             <a class="nav-link" href="logout.php">Log out</a>
                         </li>

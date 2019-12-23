@@ -37,18 +37,17 @@
                             <a class="nav-link" href="user.php">Post add</a>
                     </li> 
                     <li class="nav-item">
-                            <a class="nav-link active" href="buycar.php">Buy car</a>
+                            <a class="nav-link " href="buycar.php">Buy car</a>
                     </li> 
                     
                     <li class="nav-item">
-                         <a class="nav-link " href="recieved request.php">Recieved Request</a>
+                         <a class="nav-link" href="recieved request.php">Recieved Request</a>
                     </li>
 
                     <li class="nav-item">
                          <a class="nav-link " href="sent request.php">Sent Request</a>
                     </li>
-
-                    <li class="nav-item">
+                    <li class="nav-item active">
                          <a class="nav-link" href="myposts.php">My posts</a>
                     </li>
 
@@ -74,44 +73,12 @@
      
         <!-- post table  -->
         <!-- Select box  -->
-        <main>
-            <div class="login-area mt-5">
-                <div class="container">
-                    <div class="rowL">
-                        <div class="col-md-6 offset-md-3">
-                            <form method='post'  enctype="multipart/form-data" class="bg-white py-5 px-3">
-
-                            <div class="form-group">
-                            <label for="brand">Brand</label>
-                                <select name="brand" class="form-control" id="brand" type="text">
-                                    <option selected value="">Select Brand</option>
-                                    <?php
-                                        include("../connection.php");
-                                        $sql="select distinct brand from cars";
-                                        $r=mysqli_query($con,$sql);
-                                        while($row=mysqli_fetch_array($r))
-                                        {
-                                            $brand=$row['brand'];
-                                            echo "<option value='$brand'>$brand</option>";
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-dark btn-block mt-3" value="go" name="go">Search Car</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-    <div class="table-responsive" id="sailorTableArea">
-    <table id="sailorTable" class="table table-striped table-bordered" width="100%">
-    <?php
-        include("../connection.php");
-        if(isset($_POST['go']))
-        {
-            $brand=$_POST['brand'];
-            $query = "select * from cars,member where cars.brand = '$brand' and member.id = cars.m_id and cars.status = 1";
+        <div class="table-responsive" id="sailorTableArea">
+        <table id="sailorTable" class="table table-striped table-bordered" width="100%">
+        <?php
+            include("../connection.php");
+            $id = $_SESSION['user_id'];
+            $query = "select * from cars where m_id = $id";
             $r = mysqli_query($con,$query);
             // echo $r['brand'];
             // echo $r['make'];
@@ -135,6 +102,7 @@
             echo "<tbody>";
             while($row = mysqli_fetch_array($r))
             {
+                $brand = $row['brand'];
                 $make = $row['make'];
                 $loc = $row['loc'];
                 $make_year = $row['make_year'];
@@ -142,7 +110,6 @@
                 $price = $row['price'];
                 $image = $row['image'];
                 $m_id = $row['m_id'];
-                $mobile = $row['mobile'];
                 $pid = $row['p_id'];
                 // $_SESSION['make'] = $make;
                 // $_SESSION['loc'] = $loc;
@@ -161,15 +128,15 @@
                     <td>$make_year</td>
                     <td>$type</td>
                     <td>$price</td>
-                    <td><img src='../uploadedimage/$image' height='100px' width='100px'></td>
-                    <td><a href='viewpost.php?pid=$pid'>View post </a></td>
+                    <td><img src='../uploadedimage/$image' height='100px' width='100px'></td>";
+                    if($row['status'] == 1) echo "<td><a href='delete.php?pid=$pid'>Delete post </a></td>";
+                    else echo "<td><p style='color: yellow;'>sold</p></td>
                 </tr>";
             }
             echo "</tbody>";
             echo "</table>";
-        }
+        
     ?>
-    </div>
         <script src="../vendor/jquery-3.4.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="../vendor/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>

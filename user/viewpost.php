@@ -120,10 +120,8 @@
             {
                 $price = $_POST['price'];
                 $bid = $_SESSION['user_id'];
-                $pid = $_SESSION['pid'];
-                $sid = $_SESSION['sid'];
                 $query = "INSERT INTO `request` (`bid`,`sid`,`pid`,`price`,`status`)
-                values($bid,$sid,$pid,$price,0)";
+                values($bid,$mid,$pid,$price,0)";
                 
                 if(mysqli_query($con, $query))
                 {
@@ -131,7 +129,7 @@
                 }
                 else
                 {
-                     echo "Something went wrong";
+                   echo "Something went wrong";
                 }
                 
             }

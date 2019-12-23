@@ -45,6 +45,25 @@
                     </li>
 
                     <li class="nav-item">
+                         <a class="nav-link " href="sent request.php">Sent Request</a>
+                    </li>
+
+                    <li class="nav-item">
+                         <a class="nav-link" href="myposts.php">My posts</a>
+                    </li>
+                    <li class="nav-item">
+                         <a class="nav-link" href="mysells.php">My sells</a>
+                    </li>
+
+                    <li class="nav-item">
+                         <a class="nav-link" href="mybuys.php">My buys</a>
+                    </li>
+
+                    <li class="nav-item">
+                         <a class="nav-link" href="changepass.php">Change password</a>
+                    </li>
+
+                    <li class="nav-item">
                          <a class="nav-link" href="logout.php">Log out</a>
                     </li>
                 </ul>
@@ -60,7 +79,6 @@
         include("../connection.php");
        
             $sid=$_SESSION['user_id'];
-            echo $sid;
             $query = "select * from request where sid = $sid";
             $r = mysqli_query($con,$query);
             // echo $r['brand'];
@@ -79,13 +97,16 @@
                     <th>Mobile</th>
                     <th>Price</th>
                     <th>Image</th>
-                    <th>Action</th>
+                    <th>Action1</th>
+                    <th>Action2</th>
                 </tr>
             </thead>";
             echo "<tbody>";
             $i = 1;
             while($row = mysqli_fetch_array($r))
             {
+                if($row['status'] == 2 || $row['status'] == 5) continue;
+                $rid = $row['rid'];
                 $bid = $row['bid'];
                 $pid = $row['pid'];
                 $price = $row['price'];
@@ -118,13 +139,34 @@
                     <td>$bloc</td>
                     <td>$mobile</td>
                     <td>$price</td>
-                    <td><img src='../uploadedimage/$image' height='100px' width='100px'></td>
-                    <td><button type='submit' name='confirm' value confirm class='btn btn-dark mt-3'>Confirm</button></td>
+                    <td><img src='../uploadedimage/$image' height='100px' width='100px'></td>";
+                    if($row['status'] == 0) 
+                    {
+                        $rid = ($rid*10)+1;
+                        echo "<td><a href='update.php?rid=$rid'</a> Confirm</td>";
+                        $rid = $rid+1;
+                        echo "<td><a href='update.php?rid=$rid'</a>Reject</td>";
+                    }
+                    else if($row['status'] == 1)
+                    {
+                        $rid = ($rid*10)+3;
+                        echo "<td><p style='color: green;'>Confirmed</p></td>";
+                        echo "<td><a href='update.php?rid=$rid'</a>Cancel</td>";
+                    }
+                    else if($row['status'] == 4)
+                    {
+                        echo "<td><p style='color: yellow;'>sold</p></td>";
+                        echo "<td><p style='color: yellow;'>sold</p></td>";
+                    }
                     
-                </tr>";
+                echo"</tr>";
+                $i=$i+1;
+                
+                
             }
             echo "</tbody>";
             echo "</table>";
+            
         
     ?>
         <script src="../vendor/jquery-3.4.1.min.js"></script>
